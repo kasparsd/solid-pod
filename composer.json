@@ -13,7 +13,9 @@
       "Preseto\\SolidPod\\": "src/"
     }
   },
-  "require": {},
+  "require": {
+    "easyrdf/easyrdf": "^0.9.1"
+  },
   "require-dev": {
     "wp-coding-standards/wpcs": "^1.1"
   },
