@@ -25,7 +25,7 @@ class WebId {
 	}
 
 	public function rsa_public_key() {
-		$public_key = $this->get_rsa_key_public();
+		$public_key = $this->rsa_get_public_key();
 
 		if ( RsaKey::is_supported() && ! empty( $public_key ) ) {
 			return new RsaKey( null, $public_key );
@@ -34,9 +34,17 @@ class WebId {
 		return null;
 	}
 
-	protected function get_rsa_key_public() {
+	protected function rsa_get_public_key() {
 		// TODO Add sanitization.
-		return (string) get_user_meta( self::META_KEY_RSA_PUBLIC_KEY, $this->user->ID );
+		return (string) get_user_meta( $this->user->ID, self::META_KEY_RSA_PUBLIC_KEY );
+	}
+
+	public function rsa_store_public_key( $key ) {
+		return update_user_meta( $this->user->ID, self::META_KEY_RSA_PUBLIC_KEY, $key );
+	}
+
+	public function rsa_store_private_key( $key ) {
+		return update_user_meta( $this->user->ID, self::META_KEY_RSA_PRIVATE_KEY, $key );
 	}
 
 }
