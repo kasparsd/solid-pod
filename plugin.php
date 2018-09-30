@@ -18,4 +18,5 @@ $compat->init();
 if ( $compat->is_php_supported() ) {
 	require_once __DIR__ . '/vendor/autoload.php';
 	$plugin = new Preseto\SolidPod\SolidPodPlugin( new Preseto\SolidPod\Plugin( __FILE__ ) );
+	$plugin->init_hooks();
 }
