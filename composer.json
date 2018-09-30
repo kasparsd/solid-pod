@@ -15,7 +15,8 @@
     }
   },
   "require": {
-    "easyrdf/easyrdf": "dev-master#245addbd3d4f01c0781d0a42c082fd9d257b7b79"
+    "easyrdf/easyrdf": "dev-master#245addbd3d4f01c0781d0a42c082fd9d257b7b79",
+    "ml/json-ld": "^1.0"
   },
   "require-dev": {
     "wp-coding-standards/wpcs": "^1.1"
