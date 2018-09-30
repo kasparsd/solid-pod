@@ -4,6 +4,8 @@ namespace Preseto\SolidPod;
 
 class WebId {
 
+	const META_KEY_RSA_PRIVATE_KEY = 'solid_pod_rsa_private_key';
+
 	const META_KEY_RSA_PUBLIC_KEY = 'solid_pod_rsa_public_key';
 
 	public function __construct( $user ) {
@@ -23,18 +25,18 @@ class WebId {
 	}
 
 	public function rsa_public_key() {
-		$public_key = $this->get_rsa_public_key();
+		$public_key = $this->get_rsa_key_public();
 
-		if ( RsaPublicKey::is_supported() && ! empty( $public_key ) ) {
-			return new RsaPublicKey( $public_key );
+		if ( RsaKey::is_supported() && ! empty( $public_key ) ) {
+			return new RsaKey( null, $public_key );
 		}
 
 		return null;
 	}
 
-	protected function get_rsa_public_key() {
+	protected function get_rsa_key_public() {
 		// TODO Add sanitization.
-		return (string) get_the_author_meta( self::META_KEY_RSA_PUBLIC_KEY, $this->user->ID );
+		return (string) get_user_meta( self::META_KEY_RSA_PUBLIC_KEY, $this->user->ID );
 	}
 
 }
