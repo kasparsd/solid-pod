@@ -2,6 +2,7 @@
   "name": "kasparsd/solid-pod",
   "description": "Solid POD provider for WordPress users",
   "type": "wordpress-plugin",
+  "license": "GPL-2.0+",
   "authors": [
     {
       "name": "Kaspars Dambis",
