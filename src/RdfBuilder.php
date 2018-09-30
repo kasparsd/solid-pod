@@ -19,6 +19,7 @@ class RdfBuilder {
 		$author_resource->set( 'foaf:nick', $user->nickname ?: null );
 		$author_resource->set( 'bio:olb', $user->user_description ?: null );
 		$author_resource->set( 'foaf:account', $account_resource );
+		$author_resource->set( 'foaf:homepage', $user->user_url ? $graph->resource( $user->user_url ) : null );
 
 		$account_resource->set( 'sioc:name', $user->display_name ?: null );
 		$account_resource->set( 'sioc:account_of', $author_resource );
