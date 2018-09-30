@@ -28,7 +28,7 @@ class RdfBuilder {
 		if ( $rsa_public_key ) {
 			$key_resource = $graph->newBNode( 'cert:RSAPublicKey' );
 			$key_resource->set( 'cert:exponent', new \EasyRdf\Literal\Integer( $rsa_public_key->exponent() ) );
-			$key_resource->set('cert:modulus', new \EasyRdf\Literal\HexBinary( $rsa_public_key->modulus() ) );
+			$key_resource->set( 'cert:modulus', new \EasyRdf\Literal\HexBinary( $rsa_public_key->modulus() ) );
 			$author_resource->set( 'cert:key', $key_resource );
 		}
 
