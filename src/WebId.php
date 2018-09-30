@@ -4,8 +4,7 @@ namespace Preseto\SolidPod;
 
 class WebId {
 
-	const META_KEY_RSA_MODULUS = 'solid_pod_public_key_modulus';
-	const META_KEY_RSA_EXPONENT = 'solid_pod_public_key_exponent';
+	const META_KEY_RSA_PUBLIC_KEY = 'solid_pod_rsa_public_key';
 
 	public function __construct( $user ) {
 		$this->user = $user;
@@ -24,24 +23,18 @@ class WebId {
 	}
 
 	public function rsa_public_key() {
-		$exponent = $this->get_rsa_public_key_modulus();
-		$modulus = $this->get_rsa_public_key_exponent();
+		$public_key = $this->get_rsa_public_key();
 
-		if ( ! empty( $exponent ) && ! empty( $modulus ) ) {
-			return new RsaPublicKey( $exponent, $modulus );
+		if ( RsaPublicKey::is_supported() && ! empty( $public_key ) ) {
+			return new RsaPublicKey( $public_key );
 		}
 
 		return null;
 	}
 
-	protected function get_rsa_public_key_modulus() {
+	protected function get_rsa_public_key() {
 		// TODO Add sanitization.
-		return (string) get_the_author_meta( self::META_KEY_RSA_MODULUS, $this->user->ID );
-	}
-
-	protected function get_rsa_public_key_exponent() {
-		// TODO Add sanitization.
-		return (string) get_the_author_meta( self::META_KEY_RSA_EXPONENT, $user->ID );
+		return (string) get_the_author_meta( self::META_KEY_RSA_PUBLIC_KEY, $this->user->ID );
 	}
 
 }
