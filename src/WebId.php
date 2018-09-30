@@ -34,6 +34,14 @@ class WebId {
 		return null;
 	}
 
+	public function rsa_generate_keys() {
+		$rsa_key = new RsaKey();
+		$rsa_key->new();
+
+		$this->rsa_store_public_key( $rsa_key->public() );
+		$this->rsa_store_private_key( $rsa_key->private() );
+	}
+
 	protected function rsa_get_public_key() {
 		// TODO Add sanitization.
 		return (string) get_user_meta( $this->user->ID, self::META_KEY_RSA_PUBLIC_KEY );
