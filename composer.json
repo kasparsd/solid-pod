@@ -8,6 +8,11 @@
       "email": "hi@kaspars.net"
     }
   ],
+  "autoload": {
+    "psr-4": {
+      "Preseto\\SolidPod\\": "src/"
+    }
+  },
   "require": {},
   "require-dev": {
     "wp-coding-standards/wpcs": "^1.1"
