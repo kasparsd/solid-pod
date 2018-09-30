@@ -9,6 +9,13 @@
  * Text Domain: solid-pod
  */
 
-require_once __DIR__ . '/vendor/autoload.php';
+require_once dirname( __FILE__ ) . '/src/compat.php';
 
-$plugin = new Plugin( __FILE__ );
+// Ensure we have PHP 5.3.0+.
+$compat = new PresetoSolidPodCompat( __FILE__ );
+$compat->init();
+
+if ( $compat->is_php_supported() ) {
+	require_once __DIR__ . '/vendor/autoload.php';
+	$plugin = new Preseto\SolidPod\SolidPodPlugin( new Preseto\SolidPod\Plugin( __FILE__ ) );
+}
