@@ -5,9 +5,10 @@ namespace Preseto\SolidPod;
 class RdfType {
 
 	protected $mime_type_map = [
-		'text/turtle' => 'ttl',
+		'text/turtle' => 'turtle',
 		'application/rdf+xml' => 'rdfxml',
 		'application/json' => 'json',
+		'application/ld+json' => 'jsonld',
 	];
 
 	protected $requested;
