@@ -16,15 +16,15 @@ class SolidPodPlugin {
 
 	public function request() {
 		if ( is_author() ) {
+			$author = get_queried_object();
 			$rdf_type = new RdfType( $_SERVER['HTTP_ACCEPT'] );
 			$requested_rdf_type = $rdf_type->requested();
 
-			if ( ! empty( $requested_rdf_type ) ) {
-				$author = get_queried_object();
+			if ( ! empty( $requested_rdf_type ) && is_a( $author, 'WP_User' ) ) {
 				$rdf = new RdfBuilder();
 				$printer = new RdfPrinter( $rdf->buildUserGraph( $author ) );
 				$printer->print( $rdf_type );
-				die;
+				exit;
 			}
 		}
 	}
