@@ -46,4 +46,42 @@ class SolidPodPlugin {
 		}
 	}
 
+	public function request_pod() {
+		$pod_query = get_query_var( self::POD_QUERY_VAR );
+
+		if ( ! empty( $pod_query ) ) {
+			if ( 'openid-config' === $pod_query ) {
+				header( 'Content-Type: application/json' );
+				header( 'Access-Control-Allow-Origin: *' );
+				echo wp_json_encode( $this->get_openid_configuration(), JSON_PRETTY_PRINT );
+				exit;
+			}
+		}
+	}
+
+	protected function get_openid_configuration() {
+		return [
+			'issuer' => site_url(),
+		];
+	}
+
+	public function register_well_known_rewrite() {
+		$destination = sprintf(
+			'index.php?%s=openid-config',
+			self::POD_QUERY_VAR
+		);
+
+		add_rewrite_rule(
+			'^.well-known/openid-configuration/?',
+			$destination,
+			'top'
+		);
+	}
+
+	public function register_well_known_query( $query_vars ) {
+		$query_vars[] = self::POD_QUERY_VAR;
+
+		return $query_vars;
+	}
+
 }
