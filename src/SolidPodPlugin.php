@@ -20,7 +20,6 @@ class SolidPodPlugin {
 
 	public function init_hooks() {
 		add_action( 'template_redirect', [ $this, 'request' ] );
-		add_action( 'template_redirect', [ $this, 'request_pod' ] );
 		add_action( 'init', [ $this, 'register_well_known_rewrite' ] );
 		add_filter( 'query_vars', [ $this, 'register_well_known_query' ] );
 
@@ -32,6 +31,13 @@ class SolidPodPlugin {
 	}
 
 	public function request() {
+		$pod_query = get_query_var( self::POD_QUERY_VAR );
+
+		if ( ! empty( $pod_query ) ) {
+			$this->handle_pod_request( $pod_query );
+			exit;
+		}
+
 		if ( is_author() ) {
 			$author = get_queried_object();
 			$rdf_type = new RdfType( $_SERVER['HTTP_ACCEPT'] );
@@ -46,17 +52,8 @@ class SolidPodPlugin {
 		}
 	}
 
-	public function request_pod() {
-		$pod_query = get_query_var( self::POD_QUERY_VAR );
-
-		if ( ! empty( $pod_query ) ) {
-			if ( 'openid-config' === $pod_query ) {
-				header( 'Content-Type: application/json' );
-				header( 'Access-Control-Allow-Origin: *' );
-				echo wp_json_encode( $this->get_openid_configuration(), JSON_PRETTY_PRINT );
-				exit;
-			}
-		}
+	public function handle_pod_request( $request_type ) {
+		// TODO.
 	}
 
 	protected function get_openid_configuration() {
