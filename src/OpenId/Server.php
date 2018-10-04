@@ -60,8 +60,8 @@ class Server {
 			$client_id = md5( uniqid() );
 
 			if ( is_array( $redirect_uri ) ) {
-                $redirect_uri = implode( ' ', $redirect_uri );
-            }
+				$redirect_uri = implode( ' ', $redirect_uri );
+			}
 
 			if ( is_array( $grant_types ) ) {
 				$grant_types = implode( ' ', $grant_types );
