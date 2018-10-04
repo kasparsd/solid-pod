@@ -47,6 +47,8 @@ class Server {
 	}
 
 	public function request_register( $request ) {
+		$response = $this->response();
+
 		$client_id = $request->query( 'client_id', $request->request('client_id') );
 		$redirect_uri = $request->query( 'redirect_uris', $request->request('redirect_uris' ) );
 		$grant_types = $request->query( 'grant_types', $request->request('grant_types') );
@@ -77,10 +79,12 @@ class Server {
 				$scope
 			);
 
-			$response = $this->response( [
+			$response->setStatusCode( 201 );
+
+			$response->setParameters( [
 				'client_id' => $client_id,
 				'client_secret' => '',
-			], 201 );
+			] );
 		}
 
 		return $response;
