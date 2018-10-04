@@ -92,7 +92,7 @@ class Storage extends \OAuth2\Storage\Pdo {
 		return ! in_array( false, $created, true );
 	}
 
-	public function getBuildSql() {
+	public function getBuildSql( $table_name = 'unused' ) {
 		$sql = "
 			CREATE TABLE {$this->config['client_table']} (
 			  client_id             VARCHAR(80)   NOT NULL,
