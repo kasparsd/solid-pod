@@ -17,7 +17,7 @@ class WebId {
 	}
 
 	public function webid_uri() {
-		return $this->document_uri() . '#me';
+		return $this->document_uri() . '#i';
 	}
 
 	public function account_uri() {
