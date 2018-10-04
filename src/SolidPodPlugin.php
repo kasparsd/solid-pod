@@ -30,6 +30,7 @@ class SolidPodPlugin {
 
 	public function activation_hook() {
 		$this->openid_server->create_tables();
+		flush_rewrite_rules();
 	}
 
 	public function request() {
