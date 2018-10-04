@@ -40,7 +40,7 @@ class Server {
 
 	public function response( $params = [], $status_code = 200, $headers = [] ) {
 		$headers = array_merge( $headers, [
-			'Access-Control-Allow-Origin', '*',
+			'Access-Control-Allow-Origin' => '*',
 		] );
 
 		return new Response( $params, $status_code, $headers );
